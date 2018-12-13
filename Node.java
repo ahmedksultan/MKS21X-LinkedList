@@ -1,33 +1,37 @@
 public class Node {
 
-     private int data;
+     private Integer data;
      private Node next;
-     private Node previous;
+     private Node prev;
 
-     public Node(int val, Node n, Node p) {
+     public Node(Integer val, Node n, Node p) {
           data = val;
           next = n;
-          previous = p;
+          prev = p;
      }
 
-     public int getData() {
-          return data;
-     }
-
-     public void setNext(Node newNext) {
-          next = newNext;
-     }
-
-     public void setPrevious(Node newPrevious) {
-          previous = newPrevious;
-     }
-
-     public Node getNext() {
+     public Node next() {
           return next;
      }
 
-     public Node getPrevious() {
-          return previous;
+     public Node prev() {
+          return prev;
+     }
+
+     public void setData(Integer newData) {
+          data = newData;
+     }
+
+     public void setNext(Node other) {
+          next = other;
+     }
+
+     public void setPrev(Node other) {
+          prev = other;
+     }
+
+     public String toString() {
+          return "Node: " + data;
      }
 
 }
