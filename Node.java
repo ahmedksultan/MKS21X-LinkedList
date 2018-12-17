@@ -2,17 +2,26 @@ public class Node {
 
      /* INSTRUCTIONS
      Fields -
-          Node next,prev
-          Integer data
+          :Node next,prev
+          :Integer data
      Methods -
-          Node next()
-          Node prev()
-          void setNext(Node other)
-          void setPrev(Node other)
-          Integer getData()
-          Integer setData(Integer i)
-          String toString()
+          :Node next()
+          :Node prev()
+          :void setNext(Node other)
+          :void setPrev(Node other)
+          :Integer getData()
+          :Integer setData(Integer i)
+          :String toString()
      */
+
+     public static void main(String[] args) {
+          Node test1 = new Node(70, null, null);
+          Node test2 = new Node(60, null, test1);
+          test1.setNext(test2);
+          System.out.println(test1);
+          System.out.println(test2);
+          System.out.println(test2.prev());
+     }
 
 
      private Integer data;
@@ -52,7 +61,7 @@ public class Node {
      }
 
      public String toString() {
-          return "Node: " + data;
+          return "" + data;
      }
 
 }
