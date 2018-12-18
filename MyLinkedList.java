@@ -22,6 +22,18 @@ public class MyLinkedList {
           System.out.println(test.indexOf(7));
           System.out.println(test.remove(3));
           System.out.println(test);
+          test.add(4, 919);
+          System.out.println(test);
+
+          MyLinkedList test2 = new MyLinkedList();
+          for (int i = 0; i < 10; i++) {
+               test2.add(i);
+          }
+          System.out.println(test);
+          System.out.println(test2);
+          test.extend(test2);
+          System.out.println(test);
+          //test2 throws null pointer so it means empty
      }
 
      /* INSTRUCTIONS
@@ -40,7 +52,7 @@ public class MyLinkedList {
           :int indexOf(Integer value)
           ...void add(int index,Integer value)
           :Integer remove(int index)
-          boolean remove(Integer value) ///PRIVATE!!!
+          :boolean remove(Integer value) ///PRIVATE!!!
      */
 
      private Node start;
@@ -137,19 +149,23 @@ public class MyLinkedList {
      }
 
      public boolean contains(Integer val) {
+          Node current = start;
           for (int i = 0; i < length; i++) {
-               if (getNthNode(i).getData() == val) {
+               if (current.getData() == val) {
                     return true;
                }
+               current = current.next();
           }
           return false;
      }
 
      public int indexOf(Integer val) {
+          Node current = start;
           for (int i = 0; i < length; i++) {
-               if (getNthNode(i).getData() == val) {
+               if (current.getData() == val) {
                     return i;
                }
+               current = current.next();
           }
           return -1;
      }
@@ -175,6 +191,61 @@ public class MyLinkedList {
           }
           length--;
           return target.getData();
+     }
+
+     private boolean remove(Integer val) {
+          Node current = start;
+          for (int i = 0; i < length; i++) {
+               if (current.getData() == val) {
+                    remove(i);
+                    return true;
+               }
+               current = current.next();
+          }
+          return false;
+     }
+
+     public void add (int index, Integer value) {
+          if (index >= length || index < 0) {
+               throw new IndexOutOfBoundsException("Error! Index out of bounds: " + index);
+          }
+          Node current;
+          Node Node2 = new Node(value, null, null);
+          if (index == length) {
+               if (index == 0) {
+                    start = Node2;
+                    end = start;
+               }
+               else {
+                    add(value);
+                    length = length - 1;
+               }
+          }
+          else {
+               current = getNthNode(index);
+               if (index == 0) {
+                    start = Node2;
+               }
+               else {
+                    current.prev().setNext(Node2);
+                    Node2.setPrev(current.prev());
+               }
+               current.setPrev(Node2);
+               Node2.setNext(current);
+          }
+          length = length + 1;
+     }
+
+     public void extend(MyLinkedList other) {
+          end.setNext(other.start);
+          other.start.setPrev(end);
+          end = other.end;
+
+          //need to clear the list
+          other.end = null;
+          other.start = null;
+
+          length = length + other.size();
      }
 
 }
